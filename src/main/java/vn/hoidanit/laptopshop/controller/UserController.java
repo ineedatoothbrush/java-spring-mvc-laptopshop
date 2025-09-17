@@ -22,4 +22,9 @@ public class UserController {
         model.addAttribute("hoidanit", "hello view from controller");
         return "hello";
     }
+
+    @RequestMapping("/admin/user")
+    public String getHomePage() {
+        return "client/admin/create";
+    }
 }
