@@ -30,7 +30,7 @@ public class UserController {
     public String getUserPage(Model model) {
         model.addAttribute("newUser", new User());
         model.addAttribute("hoidanit", "hello view from controller");
-        return "/client/admin/create";
+        return "/admin/user/create";
     }
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
