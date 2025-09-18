@@ -7,5 +7,6 @@ import vn.hoidanit.laptopshop.domain.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
+    @SuppressWarnings("unchecked")
     User save(User daominhduc);
 }
