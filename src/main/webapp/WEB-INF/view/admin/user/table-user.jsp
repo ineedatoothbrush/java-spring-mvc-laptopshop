@@ -6,7 +6,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
+                <title>Table User</title>
                 <!-- Latest compiled and minified CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
                 <!-- Latest compiled JavaScript -->
@@ -41,7 +41,8 @@
                                             <td>${user.email}</td>
                                             <td>${user.fullName}</td>
                                             <td>
-                                                <button type="submit" class="btn btn-success">View</button>
+                                                <a href="/admin/user/${user.id}" type="submit"
+                                                    class="btn btn-success">View</a>
                                                 <button type="submit" class="btn btn-warning">Update</button>
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </td>
