@@ -21,7 +21,6 @@ public class UserController {
 
     private final UserService userService;
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    private static final String NUMBERS = "0123456789";
     private static final SecureRandom random = new SecureRandom();
 
     public UserController(UserService userService) {
