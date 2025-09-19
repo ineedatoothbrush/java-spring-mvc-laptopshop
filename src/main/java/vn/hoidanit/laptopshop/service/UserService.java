@@ -36,4 +36,8 @@ public class UserService {
         System.out.println(test);
         return test;
     }
+
+    public void handleDeleteUser(long id) {
+        this.userRepository.deleteById(id);
+    }
 }

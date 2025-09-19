@@ -1,9 +1,11 @@
 package vn.hoidanit.laptopshop.controller;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,9 +20,40 @@ import vn.hoidanit.laptopshop.service.UserService;
 public class UserController {
 
     private final UserService userService;
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final String NUMBERS = "0123456789";
+    private static final SecureRandom random = new SecureRandom();
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/admin/user/create")
+    public String showCreateForm(Model model) {
+        User user = new User();
+        StringBuilder sb = new StringBuilder(4);
+        // Ví dụ tự sinh mã user
+        String email = "";
+        String password = "";
+        String phone = "0";
+        String fullname = "";
+        String address = "";
+        for (int i = 0; i < 5; i++) {
+            email = sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString() + "@gmail.com";
+        }
+        for (int i = 0; i < 10; i++) {
+            phone = phone += (int) (Math.random() * 10);
+            password = sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
+            fullname = sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
+            address = sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
+        }
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPhone(phone);
+        user.setFullName(fullname);
+        user.setAddress(address);
+        model.addAttribute("newUser", user);
+        return "admin/user/create";
     }
 
     @RequestMapping("/")
@@ -67,14 +100,28 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String postUserUpdatePage(Model model, @ModelAttribute("update") User updateUser,
-            RedirectAttributes redirectAttributes) {
+    public String postUserUpdatePage(Model model, @ModelAttribute("update") User updateUser) {
         User currentUser = this.userService.getUserById(updateUser.getId());
         if (currentUser != null) {
             currentUser.setAddress(updateUser.getAddress());
             currentUser.setPhone(updateUser.getPhone());
             currentUser.setFullName(updateUser.getFullName());
             userService.handleSaveUser(currentUser);
+        }
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/delete-{id}")
+    public String getDeleteaUserPage(Model model, @PathVariable long id) {
+        model.addAttribute("delete", new User());
+        return "/admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/delete")
+    public String postDeleteUserPage(Model model, @ModelAttribute("delete") User deleteUser) {
+        User currentUser = this.userService.getUserById(deleteUser.getId());
+        if (currentUser != null) {
+            userService.handleDeleteUser(deleteUser.getId());
         }
         return "redirect:/admin/user";
     }

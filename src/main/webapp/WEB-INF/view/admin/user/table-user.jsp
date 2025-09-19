@@ -47,7 +47,8 @@
                                                     class="btn btn-success">View</a>
                                                 <a href="/admin/user/update-${user.id}" type="submit"
                                                     class="btn btn-warning">Update</a>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <a href="/admin/user/delete-${user.id}" type="submit"
+                                                    class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
