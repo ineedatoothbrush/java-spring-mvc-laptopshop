@@ -58,10 +58,6 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        List<User> list = userService.getAllUserByEmail("daodm1278@gmail.com");
-        System.out.println(list);
-        model.addAttribute("duc", "test");
-        model.addAttribute("hoidanit", "hello view from controller");
         return "hello";
     }
 
@@ -112,7 +108,7 @@ public class UserController {
     }
 
     @GetMapping("/admin/user/delete-{id}")
-    public String getDeleteaUserPage(Model model, @PathVariable long id) {
+    public String getDeleteUserPage(Model model, @PathVariable long id) {
         model.addAttribute("delete", new User());
         return "/admin/user/delete";
     }
