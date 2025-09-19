@@ -31,6 +31,7 @@
                                     <li class="list-group-item">Email: ${user.email}</li>
                                     <li class="list-group-item">Full Name: ${user.fullName}</li>
                                     <li class="list-group-item">Address: ${user.address}</li>
+                                    <li class="list-group-item">Phone Number: ${user.phone}</li>
                                 </ul>
                             </div>
                             <br>

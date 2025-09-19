@@ -31,6 +31,7 @@
                                         <th scope="col">ID</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Full Name</th>
+                                        <th scope="col">Phone Number</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -40,10 +41,12 @@
                                             <td>${user.id}</td>
                                             <td>${user.email}</td>
                                             <td>${user.fullName}</td>
+                                            <td>${user.phone}</td>
                                             <td>
-                                                <a href="/admin/user/${user.id}" type="submit"
+                                                <a href="/admin/user/detail-${user.id}" type="submit"
                                                     class="btn btn-success">View</a>
-                                                <button type="submit" class="btn btn-warning">Update</button>
+                                                <a href="/admin/user/update-${user.id}" type="submit"
+                                                    class="btn btn-warning">Update</a>
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </td>
                                         </tr>

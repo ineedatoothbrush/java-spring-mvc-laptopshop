@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UserService;
@@ -50,11 +52,30 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-    @RequestMapping("/admin/user/{id}")
+    @RequestMapping("/admin/user/detail-{id}")
     public String getUserDetailPage(Model model, @PathVariable long id) {
         User user = this.userService.getUserById(id);
         model.addAttribute("user", user);
         return "/admin/user/show";
     }
 
+    @RequestMapping("/admin/user/update-{id}")
+    public String getUserUpdatePage(Model model, @PathVariable long id) {
+        User user = this.userService.getUserById(id);
+        model.addAttribute("update", user);
+        return "/admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUserUpdatePage(Model model, @ModelAttribute("update") User updateUser,
+            RedirectAttributes redirectAttributes) {
+        User currentUser = this.userService.getUserById(updateUser.getId());
+        if (currentUser != null) {
+            currentUser.setAddress(updateUser.getAddress());
+            currentUser.setPhone(updateUser.getPhone());
+            currentUser.setFullName(updateUser.getFullName());
+            userService.handleSaveUser(currentUser);
+        }
+        return "redirect:/admin/user";
+    }
 }
