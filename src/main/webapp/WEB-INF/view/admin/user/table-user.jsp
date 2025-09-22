@@ -54,6 +54,7 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            <a href="/admin" class="btn btn-success">Back</a>
                         </div>
                     </div>
                 </div>
