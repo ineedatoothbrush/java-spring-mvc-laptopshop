@@ -39,7 +39,8 @@
                                 <div class="row">
                                     <div class="col-md-5 col-12 mx-auto">
                                         <h1>Create new user</h1>
-                                        <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
+                                        <form:form method="post" action="/admin/user/create" modelAttribute="newUser"
+                                            enctype="multipart/form-data">
                                             <hr>
                                             <div class="col" style="display: none;">
                                                 <label for="">ID</label>
@@ -72,17 +73,17 @@
                                             </div>
                                             <div class="row g-3">
                                                 <div class="col">
-                                                    <label for="inputState" class="form-label">Role</label>
-                                                    <select id="inputState" class="form-select">
-                                                        <option selected>USER</option>
-                                                        <option value="1">ADMIN</option>
-                                                    </select>
+                                                    <label class="form-label">Role</label>
+                                                    <form:select class="form-select" path="role.name">
+                                                        <form:option value="ADMIN">USER</form:option>
+                                                        <form:option value="USER">ADMIN</form:option>
+                                                    </form:select>
                                                 </div>
                                                 <div class="col">
                                                     <div class="col">
                                                         <label for="avatarFile" class="form-label">Choose Avatar</label>
                                                         <input class="form-control" type="file" id="avatarFile"
-                                                            accept=".png, .jpg, .jpeg">
+                                                            accept=".png, .jpg, .jpeg" name="daominhducFile" />
                                                     </div>
                                                 </div>
                                             </div>
