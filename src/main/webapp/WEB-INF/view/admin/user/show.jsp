@@ -6,37 +6,67 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>User Detail ${id}</title>
+                <title>Table User</title>
                 <!-- Latest compiled and minified CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
                 <!-- Latest compiled JavaScript -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <link href="/css/demo.css" rel="stylesheet">
+                <link href="/css/styles.css" rel="stylesheet" />
+                <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
             <body>
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-12 mx-auto">
-                            <div class="d-flex justify-content-between">
-                                <h1>User Detail: ${id}</h1>
-                            </div>
-                            <div class="card" style="width: 60%;">
-                                <div class="card-header">
-                                    User Information
+                <jsp:include page="../layout/header.jsp" />
+                <div id="layoutSidenav">
+                    <jsp:include page="../layout/sidebar.jsp" />
+                    <div id="layoutSidenav_content">
+                        <main>
+                            <div class="container mt-3">
+                                <div class="row">
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <h1>Table User</h1>
+                                            <a href="/admin/user/create">
+                                                <button type="submit" class="btn btn-primary">Create new user</button>
+                                            </a>
+                                        </div>
+                                        <table class="table table-bordered table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Full Name</th>
+                                                    <th scope="col">Phone Number</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="user" items="${users}">
+                                                    <tr>
+                                                        <td>${user.id}</td>
+                                                        <td>${user.email}</td>
+                                                        <td>${user.fullName}</td>
+                                                        <td>${user.phone}</td>
+                                                        <td>
+                                                            <a href="/admin/user/detail-${user.id}" type="submit"
+                                                                class="btn btn-success">View</a>
+                                                            <a href="/admin/user/update-${user.id}" type="submit"
+                                                                class="btn btn-warning">Update</a>
+                                                            <a href="/admin/user/delete-${user.id}" type="submit"
+                                                                class="btn btn-danger">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                        <a href="/admin" class="btn btn-success">Back</a>
+                                    </div>
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">ID: ${user.id}</li>
-                                    <li class="list-group-item">Email: ${user.email}</li>
-                                    <li class="list-group-item">Full Name: ${user.fullName}</li>
-                                    <li class="list-group-item">Address: ${user.address}</li>
-                                    <li class="list-group-item">Phone Number: ${user.phone}</li>
-                                </ul>
                             </div>
-                            <br>
-                            <a href="/admin/user" class="btn btn-success">Back</a>
-                        </div>
+                        </main>
+                        <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
             </body>

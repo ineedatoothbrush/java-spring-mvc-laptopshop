@@ -13,37 +13,48 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <link href="/css/demo.css" rel="stylesheet">
+                <link href="/css/styles.css" rel="stylesheet" />
+                <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
             <body>
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-md-5 col-12 mx-auto">
-                            <h1>Create new user</h1>
-                            <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <form:input type="email" path="email" class="form-control" />
+                <jsp:include page="../layout/header.jsp" />
+                <div id="layoutSidenav">
+                    <jsp:include page="../layout/sidebar.jsp" />
+                    <div id="layoutSidenav_content">
+                        <main>
+                            <div class="container mt-5">
+                                <div class="row">
+                                    <div class="col-md-5 col-12 mx-auto">
+                                        <h1>Create new user</h1>
+                                        <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                                <form:input type="email" path="email" class="form-control" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                                <form:input type="password" path="password" class="form-control" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label">Phone Number</label>
+                                                <form:input type="number" path="phone" class="form-control" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="fullName" class="form-label">Full Name</label>
+                                                <form:input type="text" path="fullName" class="form-control" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="address" class="form-label">Address</label>
+                                                <form:input type="text" path="address" class="form-control" />
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form:form>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <form:input type="password" path="password" class="form-control" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="phone" class="form-label">Phone Number</label>
-                                    <form:input type="number" path="phone" class="form-control" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="fullName" class="form-label">Full Name</label>
-                                    <form:input type="text" path="fullName" class="form-control" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address" class="form-label">Address</label>
-                                    <form:input type="text" path="address" class="form-control" />
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form:form>
-                        </div>
+                            </div>
+                        </main>
+                        <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
             </body>
