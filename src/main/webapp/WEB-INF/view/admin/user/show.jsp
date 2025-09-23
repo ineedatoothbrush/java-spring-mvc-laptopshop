@@ -24,10 +24,14 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container mt-3">
+                                <h1 class="mt-3">Dashboard</h1>
+                                <ol class="breadcrumb mb-4">
+                                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                </ol>
                                 <div class="row">
                                     <div>
                                         <div class="d-flex justify-content-between">
-                                            <h1>Table User</h1>
+                                            <h2>Table User</h2>
                                             <a href="/admin/user/create">
                                                 <button type="submit" class="btn btn-primary">Create new user</button>
                                             </a>
