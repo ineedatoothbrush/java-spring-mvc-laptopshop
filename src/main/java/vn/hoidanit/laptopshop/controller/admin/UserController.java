@@ -115,6 +115,7 @@ public class UserController {
             currentUser.setAddress(updateUser.getAddress());
             currentUser.setPhone(updateUser.getPhone());
             currentUser.setFullName(updateUser.getFullName());
+            currentUser.setRole(this.userService.getRoleByName(updateUser.getRole().getName()));
             userService.handleSaveUser(currentUser);
         }
         return "redirect:/admin/user";

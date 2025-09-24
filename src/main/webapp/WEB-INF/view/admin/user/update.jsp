@@ -53,6 +53,13 @@
                                                 <label for="address" class="form-label">Address</label>
                                                 <form:input type="text" path="address" class="form-control" />
                                             </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Role</label>
+                                                <form:select class="form-select" path="role.name">
+                                                    <form:option value="ADMIN">ADMIN</form:option>
+                                                    <form:option value="USER">USER</form:option>
+                                                </form:select>
+                                            </div>
                                             <button type="submit" class="btn btn-warning">Submit</button>
                                         </form:form>
                                     </div>
