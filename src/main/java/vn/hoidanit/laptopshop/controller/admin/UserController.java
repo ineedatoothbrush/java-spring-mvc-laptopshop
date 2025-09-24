@@ -3,6 +3,7 @@ package vn.hoidanit.laptopshop.controller.admin;
 import java.security.SecureRandom;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +23,15 @@ public class UserController {
 
     private final UserService userService;
     private final UploadService uploadService;
+    public final PasswordEncoder passwordEncoder;
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final SecureRandom random = new SecureRandom();
 
-    public UserController(UserService userService, UploadService uploadService) {
+    public UserController(UserService userService, UploadService uploadService,
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/admin/user/create")
@@ -79,7 +83,14 @@ public class UserController {
     @PostMapping(value = "/admin/user/create")
     public String createUserPage(Model model, @ModelAttribute("newUser") User daominhduc,
             @RequestParam("daominhducFile") MultipartFile file) {
-        // userService.handleSaveUser(daominhduc);
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        String hashPassword = this.passwordEncoder.encode(daominhduc.getPassword());
+
+        daominhduc.setAvatar(avatar);
+        daominhduc.setPassword(hashPassword);
+        daominhduc.setRole(this.userService.getRoleByName(daominhduc.getRole().getName()));
+
+        this.userService.handleSaveUser(daominhduc);
         return "redirect:/admin/user";
     }
 
