@@ -62,11 +62,6 @@ public class UserController {
         return "admin/user/create";
     }
 
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        return "hello";
-    }
-
     @RequestMapping("/admin/user")
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUser();
