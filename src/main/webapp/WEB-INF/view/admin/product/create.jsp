@@ -35,7 +35,7 @@
                     <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
-                            <div class="container mt-5">
+                            <div class="container mt-2">
                                 <div class="row">
                                     <div class="col-md-5 col-12 mx-auto">
                                         <h1>Add new product</h1>
@@ -49,28 +49,51 @@
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col">
+                                                    <c:set var="errorName">
+                                                        <form:errors path="name" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Name</label>
-                                                    <form:input type="text" path="name" class="form-control" />
+                                                    <form:input type="text" path="name"
+                                                        class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
+                                                    ${errorName}
                                                 </div>
                                                 <div class="col">
+                                                    <c:set var="errorPrice">
+                                                        <form:errors path="price" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Price</label>
                                                     <form:input type="number" min="0" step="0.01" path="price"
-                                                        class="form-control" />
+                                                        class="form-control ${not empty errorPrice ? 'is-invalid' : ''}" />
+                                                    ${errorPrice}
                                                 </div>
                                             </div>
                                             <div class="row mt-2">
+                                                <c:set var="errorDetailDesc">
+                                                    <form:errors path="detailDesc" cssClass="invalid-feedback" />
+                                                </c:set>
                                                 <label class="form-label">Detail Description</label>
-                                                <form:textarea type="text" path="detailDesc" class="form-control" />
+                                                <form:textarea type="text" path="detailDesc"
+                                                    class="form-control ${not empty errorDetailDesc ? 'is-invalid' : ''}" />
+                                                ${errorDetailDesc}
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col">
+                                                    <c:set var="errorShortDesc">
+                                                        <form:errors path="shortDesc" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Short Description</label>
-                                                    <form:input type="text" path="shortDesc" class="form-control" />
+                                                    <form:input type="text" path="shortDesc"
+                                                        class="form-control ${not empty errorShortDesc ? 'is-invalid' : ''}" />
+                                                    ${errorShortDesc}
                                                 </div>
                                                 <div class="col">
+                                                    <c:set var="errorQuantity">
+                                                        <form:errors path="quantity" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Quantity</label>
                                                     <form:input type="number" min="0" step="1" path="quantity"
-                                                        class="form-control" />
+                                                        class="form-control ${not empty errorQuantity ? 'is-invalid' : ''}" />
+                                                    ${errorQuantity}
                                                 </div>
                                             </div>
                                             <div class="row mt-2">
@@ -89,10 +112,10 @@
                                                 <div class="col">
                                                     <label class="form-label">Target</label>
                                                     <form:select class="form-select" path="target">
-                                                        <form:option value="Apple (Macbook)">Gaming</form:option>
-                                                        <form:option value="Asus">Design</form:option>
-                                                        <form:option value="Lenovo">Office</form:option>
-                                                        <form:option value="HP">Coding</form:option>
+                                                        <form:option value="Gaming">Gaming</form:option>
+                                                        <form:option value="Design">Design</form:option>
+                                                        <form:option value="Office">Office</form:option>
+                                                        <form:option value="Coding">Coding</form:option>
                                                     </form:select>
                                                 </div>
                                             </div>

@@ -92,7 +92,7 @@ public class UserController {
             return "/admin/user/create";
         }
 
-        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        String avatar = this.uploadService.handleSaveUploadAvatar(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(daominhduc.getPassword());
 
         daominhduc.setAvatar(avatar);

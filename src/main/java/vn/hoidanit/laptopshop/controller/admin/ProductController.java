@@ -6,6 +6,8 @@ import java.util.Random;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.domain.Product;
 
@@ -42,7 +45,8 @@ public class ProductController {
         long quantity = 0;
 
         for (int i = 0; i < 5; i++) {
-            name = "Laptop " + sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
+            name = "Laptop " +
+                    sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
         }
         for (int i = 0; i < 100; i++) {
             detailDesc = sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
@@ -76,7 +80,16 @@ public class ProductController {
     }
 
     @PostMapping(value = "/admin/product/create")
-    public String createProductPage(Model model, @ModelAttribute("newProduct") Product laptop) {
+    public String createProductPage(Model model, @ModelAttribute("newProduct") @Valid Product laptop,
+            BindingResult bindingResult) {
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "/admin/product/create";
+        }
         this.productService.handleSaveProduct(laptop);
         return "redirect:/admin/product";
     }
