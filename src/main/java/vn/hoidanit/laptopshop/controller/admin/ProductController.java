@@ -17,17 +17,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.service.ProductService;
+import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.domain.Product;
 
 @Controller
 public class ProductController {
 
+    private final UploadService uploadService;
     private final ProductService productService;
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final SecureRandom random = new SecureRandom();
 
-    ProductController(ProductService productService) {
+    ProductController(ProductService productService, UploadService uploadService) {
         this.productService = productService;
+        this.uploadService = uploadService;
     }
 
     @GetMapping("/admin/product/create")
@@ -81,7 +84,7 @@ public class ProductController {
 
     @PostMapping(value = "/admin/product/create")
     public String createProductPage(Model model, @ModelAttribute("newProduct") @Valid Product laptop,
-            BindingResult bindingResult) {
+            BindingResult bindingResult, @RequestParam("daominhducFile") MultipartFile file) {
         List<FieldError> errors = bindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(error.getField() + " - " + error.getDefaultMessage());
@@ -90,6 +93,8 @@ public class ProductController {
         if (bindingResult.hasErrors()) {
             return "/admin/product/create";
         }
+        String picture = this.uploadService.handleSaveUploadLaptopPicture(file, "product");
+        laptop.setImage(picture);
         this.productService.handleSaveProduct(laptop);
         return "redirect:/admin/product";
     }
