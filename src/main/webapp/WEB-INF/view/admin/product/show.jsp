@@ -56,7 +56,8 @@
                                                         <td>${product.price} $</td>
                                                         <td>${product.factory}</td>
                                                         <td>
-                                                            <a href="" type="submit" class="btn btn-success">View</a>
+                                                            <a href="/admin/product/detail-${product.id}" type="submit"
+                                                                class="btn btn-success">View</a>
                                                             <a href="" type="submit" class="btn btn-warning">Update</a>
                                                             <a href="" type="submit" class="btn btn-danger">Delete</a>
                                                         </td>

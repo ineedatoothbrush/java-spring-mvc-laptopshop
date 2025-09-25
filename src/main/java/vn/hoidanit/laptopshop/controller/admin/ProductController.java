@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.domain.Product;
+import vn.hoidanit.laptopshop.domain.User;
 
 @Controller
 public class ProductController {
@@ -97,5 +99,12 @@ public class ProductController {
         laptop.setImage(picture);
         this.productService.handleSaveProduct(laptop);
         return "redirect:/admin/product";
+    }
+
+    @RequestMapping("/admin/product/detail-{id}")
+    public String getProductDetailPage(Model model, @PathVariable long id) {
+        Product products = this.productService.getProductById(id);
+        model.addAttribute("product", products);
+        return "/admin/product/detail";
     }
 }
