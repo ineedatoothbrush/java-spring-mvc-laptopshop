@@ -6,8 +6,15 @@
             <html lang="en">
 
             <head>
-                <meta charset="utf-8" />
-                <title>Dashboard</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Product</title>
+                <!-- Latest compiled and minified CSS -->
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+                <!-- Latest compiled JavaScript -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <link href="/css/demo.css" rel="stylesheet">
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -18,12 +25,48 @@
                     <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
-                            <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage Product</h1>
+                            <div class="container mt-3">
+                                <h1 class="mt-3">Dashboard</h1>
                                 <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb-item active"><a href="/admin">Manage Product</a></li>
+                                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                                 </ol>
-                                Product
+                                <div class="row">
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <h2>Table User</h2>
+                                            <a href="/admin/product/create">
+                                                <button type="submit" class="btn btn-primary">Add new product</button>
+                                            </a>
+                                        </div>
+                                        <table class="table table-bordered table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Factory</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="product" items="${products}">
+                                                    <tr>
+                                                        <td>${product.id}</td>
+                                                        <td>${product.name}</td>
+                                                        <td>${product.price}</td>
+                                                        <td>${product.factory}</td>
+                                                        <td>
+                                                            <a href="" type="submit" class="btn btn-success">View</a>
+                                                            <a href="" type="submit" class="btn btn-warning">Update</a>
+                                                            <a href="" type="submit" class="btn btn-danger">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                        <a href="/admin" class="btn btn-success">Back</a>
+                                    </div>
+                                </div>
                             </div>
                         </main>
                         <jsp:include page="../layout/footer.jsp" />

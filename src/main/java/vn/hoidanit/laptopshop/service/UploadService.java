@@ -22,13 +22,15 @@ public class UploadService {
         String rootPath = this.servletContext.getRealPath("/resources/images");
         String finalName = "";
         try {
+            if (file == null || file.isEmpty()) {
+                return "";
+            }
             byte[] bytes;
             bytes = file.getBytes();
 
             File dir = new File(rootPath + File.separator + "avatar");
             if (!dir.exists())
                 dir.mkdirs();
-
             finalName = System.currentTimeMillis() + "-" + file.getOriginalFilename();
             // Create the file on server
             File serverFile = new File(dir.getAbsolutePath() + File.separator + finalName);
