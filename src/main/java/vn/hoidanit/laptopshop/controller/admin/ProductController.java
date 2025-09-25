@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.domain.Product;
-import vn.hoidanit.laptopshop.domain.User;
 
 @Controller
 public class ProductController {
