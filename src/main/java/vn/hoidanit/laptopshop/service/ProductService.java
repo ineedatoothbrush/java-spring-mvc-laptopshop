@@ -17,8 +17,7 @@ public class ProductService {
     }
 
     public Product handleSaveProduct(Product laptop) {
-        Product test = this.productRepository.save(laptop);
-        return test;
+        return this.productRepository.save(laptop);
     }
 
     public List<Product> getAllProduct() {

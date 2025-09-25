@@ -21,6 +21,7 @@ import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.domain.Product;
+import vn.hoidanit.laptopshop.domain.User;
 
 @Controller
 public class ProductController {
@@ -122,6 +123,29 @@ public class ProductController {
         if (currentProduct != null) {
             file.delete();
             this.productService.handleDeleteProduct(deleteProduct.getId());
+        }
+        return "redirect:/admin/product";
+    }
+
+    @RequestMapping("/admin/product/update-{id}")
+    public String getProductUpdatePage(Model model, @PathVariable long id) {
+        Product product = this.productService.getProductById(id);
+        model.addAttribute("update", product);
+        return "/admin/product/update";
+    }
+
+    @PostMapping("/admin/product/update")
+    public String postUserUpdatePage(Model model, @ModelAttribute("update") Product updateProduct,
+            @RequestParam("daominhducFile") MultipartFile file) {
+        Product currentProduct = this.productService.getProductById(updateProduct.getId());
+        if (currentProduct != null) {
+            currentProduct.setName(updateProduct.getName());
+            currentProduct.setPrice(updateProduct.getPrice());
+            currentProduct.setDetailDesc(updateProduct.getDetailDesc());
+            currentProduct.setShortDesc(updateProduct.getShortDesc());
+            currentProduct.setFactory(updateProduct.getFactory());
+            currentProduct.setTarget(updateProduct.getTarget());
+            productService.handleSaveProduct(currentProduct);
         }
         return "redirect:/admin/product";
     }
