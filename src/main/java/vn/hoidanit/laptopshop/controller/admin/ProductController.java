@@ -21,7 +21,6 @@ import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.domain.Product;
-import vn.hoidanit.laptopshop.domain.User;
 
 @Controller
 public class ProductController {
