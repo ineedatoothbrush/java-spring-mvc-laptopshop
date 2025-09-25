@@ -59,7 +59,8 @@
                                                             <a href="/admin/product/detail-${product.id}" type="submit"
                                                                 class="btn btn-success">View</a>
                                                             <a href="" type="submit" class="btn btn-warning">Update</a>
-                                                            <a href="" type="submit" class="btn btn-danger">Delete</a>
+                                                            <a href="/admin/product/delete-${product.id}" type="submit"
+                                                                class="btn btn-danger">Delete</a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>

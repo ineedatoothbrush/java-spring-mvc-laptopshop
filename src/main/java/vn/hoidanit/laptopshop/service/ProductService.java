@@ -28,4 +28,8 @@ public class ProductService {
     public Product getProductById(long id) {
         return this.productRepository.findById(id);
     }
+
+    public void handleDeleteProduct(long id) {
+        this.productRepository.deleteById(id);
+    }
 }

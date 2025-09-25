@@ -1,5 +1,6 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
+import java.io.File;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +21,7 @@ import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.domain.Product;
+import vn.hoidanit.laptopshop.domain.User;
 
 @Controller
 public class ProductController {
@@ -105,5 +107,23 @@ public class ProductController {
         Product products = this.productService.getProductById(id);
         model.addAttribute("product", products);
         return "/admin/product/detail";
+    }
+
+    @GetMapping("/admin/product/delete-{id}")
+    public String getDeleteProductPage(Model model, @PathVariable long id) {
+        model.addAttribute("delete", new Product());
+        return "/admin/product/delete";
+    }
+
+    @PostMapping("/admin/product/delete")
+    public String postDeleteProductPage(Model model, @ModelAttribute("delete") Product deleteProduct) {
+        Product currentProduct = this.productService.getProductById(deleteProduct.getId());
+        File file = new File("E:\\My New Project\\laptopshop\\src\\main\\webapp\\resources\\images\\product\\"
+                + currentProduct.getImage());
+        if (currentProduct != null) {
+            file.delete();
+            this.productService.handleDeleteProduct(deleteProduct.getId());
+        }
+        return "redirect:/admin/product";
     }
 }
