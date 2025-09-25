@@ -53,7 +53,7 @@
                                                     <tr>
                                                         <td>${product.id}</td>
                                                         <td>${product.name}</td>
-                                                        <td>${product.price}</td>
+                                                        <td>${product.price} $</td>
                                                         <td>${product.factory}</td>
                                                         <td>
                                                             <a href="" type="submit" class="btn btn-success">View</a>
