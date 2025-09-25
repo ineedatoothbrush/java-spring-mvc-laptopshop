@@ -1,5 +1,6 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
+import java.io.File;
 import java.security.SecureRandom;
 import java.util.List;
 
@@ -139,7 +140,10 @@ public class UserController {
     @PostMapping("/admin/user/delete")
     public String postDeleteUserPage(Model model, @ModelAttribute("delete") User deleteUser) {
         User currentUser = this.userService.getUserById(deleteUser.getId());
+        File file = new File("E:\\My New Project\\laptopshop\\src\\main\\webapp\\resources\\images\\avatar\\"
+                + currentUser.getAvatar());
         if (currentUser != null) {
+            file.delete();
             userService.handleDeleteUser(deleteUser.getId());
         }
         return "redirect:/admin/user";
