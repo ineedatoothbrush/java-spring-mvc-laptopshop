@@ -38,6 +38,7 @@
                             <div class="container mt-5">
                                 <div class="row">
                                     <div class="col-md-5 col-12 mx-auto">
+                                        <a href="/admin/user" class="btn btn-success">Back</a>
                                         <h1>Create new user</h1>
                                         <form:form method="post" action="/admin/user/create" modelAttribute="newUser"
                                             enctype="multipart/form-data">
@@ -49,22 +50,42 @@
                                             </div>
                                             <div class="row g-3 mt-2">
                                                 <div class="col">
+                                                    <c:set var="errorEmail">
+                                                        <form:errors path="email" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Email</label>
-                                                    <form:input type="email" path="email" class="form-control" />
+                                                    <form:input type="email" path="email"
+                                                        class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" />
+                                                    ${errorEmail}
                                                 </div>
                                                 <div class="col">
+                                                    <c:set var="errorPassword">
+                                                        <form:errors path="password" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Password</label>
-                                                    <form:input type="password" path="password" class="form-control" />
+                                                    <form:input type="password" path="password"
+                                                        class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" />
+                                                    ${errorPassword}
                                                 </div>
                                             </div>
                                             <div class="row g-3 mt-2">
                                                 <div class="col">
+                                                    <c:set var="errorPhone">
+                                                        <form:errors path="phone" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Phone Number</label>
-                                                    <form:input type="number" path="phone" class="form-control" />
+                                                    <form:input type="number" path="phone"
+                                                        class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" />
+                                                    ${errorPhone}
                                                 </div>
                                                 <div class="col">
+                                                    <c:set var="errorName">
+                                                        <form:errors path="fullName" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Full Name</label>
-                                                    <form:input type="text" path="fullName" class="form-control" />
+                                                    <form:input type="text" path="fullName"
+                                                        class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
+                                                    ${errorName}
                                                 </div>
                                             </div>
                                             <div class="mb-3">
