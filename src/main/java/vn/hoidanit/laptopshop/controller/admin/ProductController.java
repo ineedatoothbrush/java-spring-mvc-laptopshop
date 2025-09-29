@@ -134,8 +134,7 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/update")
-    public String postUserUpdatePage(Model model, @ModelAttribute("update") Product updateProduct,
-            @RequestParam("daominhducFile") MultipartFile file) {
+    public String postUserUpdatePage(Model model, @ModelAttribute("update") Product updateProduct) {
         Product currentProduct = this.productService.getProductById(updateProduct.getId());
         if (currentProduct != null) {
             currentProduct.setName(updateProduct.getName());
