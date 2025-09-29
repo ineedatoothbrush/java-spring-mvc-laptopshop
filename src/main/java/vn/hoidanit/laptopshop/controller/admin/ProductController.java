@@ -28,7 +28,6 @@ public class ProductController {
     private final UploadService uploadService;
     private final ProductService productService;
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    private static final SecureRandom random = new SecureRandom();
 
     ProductController(ProductService productService, UploadService uploadService) {
         this.productService = productService;
