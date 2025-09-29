@@ -38,35 +38,39 @@ public class ProductController {
     @GetMapping("/admin/product/create")
     public String showCreateForm(Model model) {
         Product product = new Product();
-        StringBuilder sb = new StringBuilder(4);
         Random rand = new Random();
         double randomDouble = rand.nextDouble() * 1000;
-        // Ví dụ tự sinh mã user
 
-        String name = "";
-        double price = 0;
-        String detailDesc = "";
-        String shortDesc = "";
-        long quantity = 0;
-
+        // name 5 ký tự
+        StringBuilder sbName = new StringBuilder();
         for (int i = 0; i < 5; i++) {
-            name = "Laptop " +
-                    sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
+            sbName.append(CHARACTERS.charAt(rand.nextInt(CHARACTERS.length())));
         }
-        for (int i = 0; i < 100; i++) {
-            detailDesc = sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
+        String name = "Laptop " + sbName;
 
+        // detailDesc 100 ký tự
+        StringBuilder sbDetail = new StringBuilder();
+        for (int i = 0; i < 100; i++) {
+            sbDetail.append(CHARACTERS.charAt(rand.nextInt(CHARACTERS.length())));
         }
+        String detailDesc = sbDetail.toString();
+
+        // shortDesc 5 ký tự
+        StringBuilder sbShort = new StringBuilder();
         for (int i = 0; i < 10; i++) {
-            shortDesc = sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))).toString();
+            sbShort.append(CHARACTERS.charAt(rand.nextInt(CHARACTERS.length())));
         }
-        quantity = rand.nextLong(300);
-        price = Math.round(randomDouble * 1000.0) / 100.0;
+        String shortDesc = sbShort.toString();
+
+        long quantity = rand.nextLong(300);
+        double price = Math.round(randomDouble * 1000.0) / 100.0;
+
         product.setName(name);
         product.setPrice(price);
         product.setDetailDesc(detailDesc);
         product.setShortDesc(shortDesc);
         product.setQuantity(quantity);
+
         model.addAttribute("newProduct", product);
         return "admin/product/create";
     }
