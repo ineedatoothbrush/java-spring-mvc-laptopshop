@@ -34,11 +34,17 @@
                                                         modelAttribute="registerUser">
                                                         <div class="row mb-3">
                                                             <div class="col-md-6">
+                                                                <c:set var="errorName">
+                                                                    <form:errors path="firstName"
+                                                                        cssClass="invalid-feedback" />
+                                                                </c:set>
                                                                 <div class="form-floating mb-3 mb-md-0">
-                                                                    <form:input class="form-control" type="text"
-                                                                        placeholder="Enter your First Name"
+                                                                    <form:input
+                                                                        class="form-control ${not empty errorName ? 'is-invalid' : ''}"
+                                                                        type="text" placeholder="Enter your First Name"
                                                                         path="firstName" />
                                                                     <label>First name</label>
+                                                                    ${errorName}
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
@@ -63,10 +69,17 @@
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-md-6">
+                                                                <c:set var="errorPassword">
+                                                                    <form:errors path="password"
+                                                                        cssClass="invalid-feedback" />
+                                                                </c:set>
                                                                 <div class="form-floating mb-3 mb-md-0">
-                                                                    <form:input class="form-control" type="text"
-                                                                        placeholder="Create password" path="password" />
+                                                                    <form:input
+                                                                        class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
+                                                                        type="text" placeholder="Create password"
+                                                                        path="password" />
                                                                     <label>Password</label>
+                                                                    ${errorPassword}
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">

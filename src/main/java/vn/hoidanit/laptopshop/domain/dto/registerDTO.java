@@ -1,13 +1,22 @@
 package vn.hoidanit.laptopshop.domain.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import vn.hoidanit.laptopshop.service.validator.RegisterChecked;
 
 @RegisterChecked
 public class RegisterDTO {
+
+    @NotEmpty(message = "- Không được để trống")
     private String firstName;
     private String lastName;
+
+    @NotEmpty(message = "- Không được để trống")
     private String email;
+
+    @NotEmpty(message = "- Không được để trống")
     private String password;
+
+    @NotEmpty(message = "- Không được để trống")
     private String confirmPassword;
 
     public String getFirstName() {
