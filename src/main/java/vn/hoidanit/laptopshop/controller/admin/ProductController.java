@@ -1,7 +1,6 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
 import java.io.File;
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
