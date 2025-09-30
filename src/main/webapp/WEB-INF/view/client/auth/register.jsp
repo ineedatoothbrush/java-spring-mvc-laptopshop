@@ -51,9 +51,15 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-floating mb-3">
-                                                            <form:input class="form-control" type="text"
-                                                                placeholder="Enter your Email" path="email" />
+                                                            <c:set var="errorEmail">
+                                                                <form:errors path="email" cssClass="invalid-feedback" />
+                                                            </c:set>
+                                                            <form:input
+                                                                class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
+                                                                type="text" placeholder="Enter your Email"
+                                                                path="email" />
                                                             <label>Email</label>
+                                                            ${errorEmail}
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-md-6">
@@ -65,10 +71,16 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-floating">
-                                                                    <form:input class="form-control" type="text"
-                                                                        placeholder="Confirm Password"
+                                                                    <c:set var="errorPassword">
+                                                                        <form:errors path="confirmPassword"
+                                                                            cssClass="invalid-feedback" />
+                                                                    </c:set>
+                                                                    <form:input
+                                                                        class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
+                                                                        type="text" placeholder="Confirm Password"
                                                                         path="confirmPassword" />
                                                                     <label>Confirm Password</label>
+                                                                    ${errorPassword}
                                                                 </div>
                                                             </div>
                                                         </div>

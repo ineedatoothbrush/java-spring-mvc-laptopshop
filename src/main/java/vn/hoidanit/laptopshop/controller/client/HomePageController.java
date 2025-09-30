@@ -49,9 +49,9 @@ public class HomePageController {
     @PostMapping("/register")
     public String postRegisterPage(@ModelAttribute("registerUser") @Valid RegisterDTO daominhduc,
             BindingResult bindingResult) {
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>" + error.getField() + " - " + error.getDefaultMessage());
+        if (bindingResult.hasErrors()) {
+            // trả model và bindingResult về view
+            return "client/auth/register";
         }
         User user = this.userService.RegisterDTOtoUser(daominhduc);
         String hashPassword = this.passwordEncoder.encode(user.getPassword());

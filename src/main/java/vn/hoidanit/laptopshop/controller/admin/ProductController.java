@@ -89,12 +89,8 @@ public class ProductController {
     @PostMapping(value = "/admin/product/create")
     public String createProductPage(Model model, @ModelAttribute("newProduct") @Valid Product laptop,
             BindingResult bindingResult, @RequestParam("daominhducFile") MultipartFile file) {
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(error.getField() + " - " + error.getDefaultMessage());
-        }
-
         if (bindingResult.hasErrors()) {
+            // trả model và bindingResult về view
             return "/admin/product/create";
         }
         String picture = this.uploadService.handleSaveUploadLaptopPicture(file, "product");
@@ -138,6 +134,7 @@ public class ProductController {
     @PostMapping("/admin/product/update")
     public String postUserUpdatePage(Model model, @ModelAttribute("update") Product updateProduct) {
         Product currentProduct = this.productService.getProductById(updateProduct.getId());
+
         if (currentProduct != null) {
             currentProduct.setName(updateProduct.getName());
             currentProduct.setPrice(updateProduct.getPrice());
