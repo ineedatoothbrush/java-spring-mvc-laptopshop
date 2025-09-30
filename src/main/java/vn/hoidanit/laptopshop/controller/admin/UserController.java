@@ -84,13 +84,9 @@ public class UserController {
             BindingResult bindingResult,
             @RequestParam("daominhducFile") MultipartFile file) {
 
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(error.getField() + " - " + error.getDefaultMessage());
-        }
-
         if (bindingResult.hasErrors()) {
-            return "/admin/user/create";
+            // trả model và bindingResult về view
+            return "admin/user/create";
         }
 
         String avatar = this.uploadService.handleSaveUploadAvatar(file, "avatar");

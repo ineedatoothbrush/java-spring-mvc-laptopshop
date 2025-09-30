@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -21,23 +21,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
-    @Email(message = "Email is not valid")
+    @NotEmpty(message = "- Không được để trống")
+    @Email(message = "- Email is not valid")
     private String email;
 
-    @NotNull
-    @Size(min = 6, message = "Password phải có tối thiểu 6 ký tự")
+    @NotEmpty(message = "- Không được để trống")
+    @Size(min = 6, message = "- Password phải có tối thiểu 6 ký tự")
     private String password;
 
-    @NotNull
-    @Size(min = 2, message = "Tên phải có tối thiểu 2 ký tự")
+    @NotEmpty(message = "- Không được để trống")
+    @Size(min = 2, message = "- Tên phải có tối thiểu 2 ký tự")
     private String fullName;
 
-    @NotNull
+    @NotEmpty(message = "- Không được để trống")
     private String address;
 
-    @NotNull
-    @Size(min = 9, message = "Số điện thoại phải có tối thiểu 9 chữ số")
+    @NotEmpty(message = "- Không được để trống")
+    @Size(min = 9, message = "- Số điện thoại phải có tối thiểu 9 chữ số")
     private String phone;
 
     private String avatar;

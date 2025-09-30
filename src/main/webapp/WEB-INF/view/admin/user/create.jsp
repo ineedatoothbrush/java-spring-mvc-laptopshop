@@ -89,8 +89,13 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
+                                                <c:set var="errorAddress">
+                                                    <form:errors path="address" cssClass="invalid-feedback" />
+                                                </c:set>
                                                 <label for="address" class="form-label">Address</label>
-                                                <form:input type="text" path="address" class="form-control" />
+                                                <form:input type="text" path="address"
+                                                    class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" />
+                                                ${errorAddress}
                                             </div>
                                             <div class="row g-3">
                                                 <div class="col">
