@@ -76,13 +76,13 @@ public class ProductController {
     public String getProduct(Model model) {
         List<Product> products = this.productService.getAllProduct();
         model.addAttribute("products", products);
-        return "/admin/product/show";
+        return "admin/product/show";
     }
 
     @RequestMapping("/admin/product/create")
     public String getCreateProductPage(Model model) {
         model.addAttribute("newProduct", new Product());
-        return "/admin/product/create";
+        return "admin/product/create";
     }
 
     @PostMapping(value = "/admin/product/create")
@@ -90,7 +90,7 @@ public class ProductController {
             BindingResult bindingResult, @RequestParam("daominhducFile") MultipartFile file) {
         if (bindingResult.hasErrors()) {
             // trả model và bindingResult về view
-            return "/admin/product/create";
+            return "admin/product/create";
         }
         String picture = this.uploadService.handleSaveUploadLaptopPicture(file, "product");
         laptop.setImage(picture);
@@ -102,13 +102,13 @@ public class ProductController {
     public String getProductDetailPage(Model model, @PathVariable long id) {
         Product products = this.productService.getProductById(id);
         model.addAttribute("product", products);
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/delete-{id}")
     public String getDeleteProductPage(Model model, @PathVariable long id) {
         model.addAttribute("delete", new Product());
-        return "/admin/product/delete";
+        return "admin/product/delete";
     }
 
     @PostMapping("/admin/product/delete")
@@ -127,7 +127,7 @@ public class ProductController {
     public String getProductUpdatePage(Model model, @PathVariable long id) {
         Product product = this.productService.getProductById(id);
         model.addAttribute("update", product);
-        return "/admin/product/update";
+        return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
