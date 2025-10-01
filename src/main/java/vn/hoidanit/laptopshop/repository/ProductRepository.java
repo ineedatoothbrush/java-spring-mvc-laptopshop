@@ -1,5 +1,7 @@
 package vn.hoidanit.laptopshop.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +12,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @SuppressWarnings("unchecked")
     Product save(Product laptop);
 
-    Product findById(long id);
+    Optional<Product> findById(long id);
 }

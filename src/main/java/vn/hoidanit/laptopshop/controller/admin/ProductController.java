@@ -2,6 +2,7 @@ package vn.hoidanit.laptopshop.controller.admin;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.stereotype.Controller;
@@ -100,7 +101,7 @@ public class ProductController {
 
     @RequestMapping("/admin/product/detail-{id}")
     public String getProductDetailPage(Model model, @PathVariable long id) {
-        Product products = this.productService.getProductById(id);
+        Optional<Product> products = this.productService.fetchProductById(id);
         model.addAttribute("product", products);
         return "admin/product/detail";
     }
@@ -113,9 +114,9 @@ public class ProductController {
 
     @PostMapping("/admin/product/delete")
     public String postDeleteProductPage(Model model, @ModelAttribute("delete") Product deleteProduct) {
-        Product currentProduct = this.productService.getProductById(deleteProduct.getId());
+        Optional<Product> currentProduct = this.productService.fetchProductById(deleteProduct.getId());
         File file = new File("E:\\My New Project\\laptopshop\\src\\main\\webapp\\resources\\images\\product\\"
-                + currentProduct.getImage());
+                + currentProduct.get().getImage());
         if (currentProduct != null) {
             file.delete();
             this.productService.handleDeleteProduct(deleteProduct.getId());
@@ -125,17 +126,17 @@ public class ProductController {
 
     @RequestMapping("/admin/product/update-{id}")
     public String getProductUpdatePage(Model model, @PathVariable long id) {
-        Product product = this.productService.getProductById(id);
+        Optional<Product> product = this.productService.fetchProductById(id);
         model.addAttribute("update", product);
         return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
-    public String postUserUpdatePage(Model model, @ModelAttribute("update") Product updateProduct) {
-        Product currentProduct = this.productService.getProductById(updateProduct.getId());
+    public String postUserUpdatePage(Model model, @ModelAttribute("update") @Valid Product updateProduct) {
+        Product currentProduct = this.productService.fetchProductById(updateProduct.getId()).get();
 
         if (currentProduct != null) {
-            currentProduct.setName(updateProduct.getName());
+
             currentProduct.setPrice(updateProduct.getPrice());
             currentProduct.setDetailDesc(updateProduct.getDetailDesc());
             currentProduct.setShortDesc(updateProduct.getShortDesc());
