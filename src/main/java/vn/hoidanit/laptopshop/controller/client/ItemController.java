@@ -26,7 +26,7 @@ public class ItemController {
     @RequestMapping("/product/{id}")
     public String getProductDetailPage(Model model, @PathVariable long id) {
         Optional<Product> products = this.productService.fetchProductById(id);
-        model.addAttribute("product", products);
+        model.addAttribute("product", products.get());
         return "client/product/detail";
     }
 
