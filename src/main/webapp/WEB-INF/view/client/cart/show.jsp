@@ -85,7 +85,7 @@
                                             <tr>
                                                 <th scope="row">
                                                     <div class="d-flex align-items-center">
-                                                        <img src="${cartDetail.product.image}"
+                                                        <img src="/images/product/${cartDetail.product.image}"
                                                             class="img-fluid me-5 rounded-circle"
                                                             style="width: 80px; height: 80px;" alt="">
                                                     </div>
