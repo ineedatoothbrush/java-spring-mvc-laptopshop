@@ -3,7 +3,6 @@ package vn.hoidanit.laptopshop.domain;
 import java.io.Serializable;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,8 +24,8 @@ public class CartDetail implements Serializable {
     private double price;
 
     // cart_id: long
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
     // product_id: long

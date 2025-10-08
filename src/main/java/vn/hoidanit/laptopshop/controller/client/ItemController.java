@@ -64,7 +64,7 @@ public class ItemController {
         for (CartDetail cd : cartDetails) {
             totalPrice += cd.getPrice() * cd.getQuantity();
         }
-
+        model.addAttribute("cart", cart);
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
 
@@ -73,7 +73,7 @@ public class ItemController {
 
     @PostMapping("/delete-cart-product/{id}")
     public String deleteCartDetail(@PathVariable long id, HttpServletRequest request) {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         long cartDetailId = id;
         this.productService.handleRemoveCartDetail(cartDetailId, session);
         return "redirect:/cart";
@@ -94,7 +94,7 @@ public class ItemController {
         for (CartDetail cd : cartDetails) {
             totalPrice += cd.getPrice() * cd.getQuantity();
         }
-
+        model.addAttribute("cart", cart);
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
 
@@ -121,6 +121,7 @@ public class ItemController {
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
 
+        this.productService.handlePlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
         // Parse selected item IDs
         List<Long> selectedItemIds = new ArrayList<>();
         if (selectedItems != null && !selectedItems.isEmpty()) {
@@ -129,6 +130,6 @@ public class ItemController {
                 selectedItemIds.add(Long.parseLong(idStr));
             }
         }
-        return "redirect:/";
+        return "client/cart/thanks";
     }
 }
