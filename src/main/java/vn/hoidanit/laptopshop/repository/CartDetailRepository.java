@@ -11,4 +11,6 @@ import vn.hoidanit.laptopshop.domain.Product;
 public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
 
     CartDetail findByCartAndProduct(Cart cart, Product product);
+
+    long countByCart(Cart cart);
 }

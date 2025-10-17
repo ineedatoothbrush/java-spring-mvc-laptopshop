@@ -121,7 +121,6 @@ public class ItemController {
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
 
-        this.productService.handlePlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
         // Parse selected item IDs
         List<Long> selectedItemIds = new ArrayList<>();
         if (selectedItems != null && !selectedItems.isEmpty()) {
@@ -130,6 +129,10 @@ public class ItemController {
                 selectedItemIds.add(Long.parseLong(idStr));
             }
         }
-        return "client/cart/thanks";
+
+        this.productService.handlePlaceOrder(currentUser, session, receiverName,
+                receiverAddress, receiverPhone, selectedItemIds);
+
+        return "redirect:/thanks";
     }
 }

@@ -17,6 +17,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UserService;
 
@@ -51,17 +52,23 @@ public class CustomSuccessHandle implements AuthenticationSuccessHandler {
 
         String email = authentication.getName();
         User user = this.userService.getUserByEmail(email);
+        // Sửa lại đoạn cuối của hàm
+        // ...
         if (user != null) {
             session.setAttribute("fullName", user.getFullName());
             session.setAttribute("avatar", user.getAvatar());
             session.setAttribute("id", user.getId());
             session.setAttribute("email", user.getEmail());
-            int sum;
-            if (user.getCart() == null) {
+
+            Cart userCart = user.getCart();
+
+            // Nếu người dùng chưa có giỏ hàng, hoặc giỏ hàng trống
+            if (userCart == null || userCart.getCartDetails() == null || userCart.getCartDetails().isEmpty()) {
                 session.setAttribute("sum", 0);
             } else {
-                sum = user.getCart().getSum();
-                session.setAttribute("sum", sum);
+                // Lấy số lượng sản phẩm thực tế từ danh sách cartDetails
+                int actualSum = userCart.getCartDetails().size();
+                session.setAttribute("sum", actualSum);
             }
         }
     }
