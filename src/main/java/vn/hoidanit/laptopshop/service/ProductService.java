@@ -139,6 +139,10 @@ public class ProductService {
         return this.cartRepository.findByUser(user);
     }
 
+    public Cart fetchByCart(User user) {
+        return this.cartRepository.findByUser(user);
+    }
+
     public void handlePlaceOrder(
             User user, HttpSession session,
             String receiverName, String receiverAddress, String receiverPhone,
