@@ -133,6 +133,6 @@ public class ItemController {
         this.productService.handlePlaceOrder(currentUser, session, receiverName,
                 receiverAddress, receiverPhone, selectedItemIds);
 
-        return "redirect:/thanks";
+        return "client/cart/thanks";
     }
 }
