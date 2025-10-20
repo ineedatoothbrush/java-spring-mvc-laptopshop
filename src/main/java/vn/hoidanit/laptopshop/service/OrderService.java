@@ -25,4 +25,12 @@ public class OrderService {
         return this.orderRepository.findById(id);
     }
 
+    public Order handleSaveOrder(Order order) {
+        return this.orderRepository.save(order);
+    }
+
+    public void handleDeleteOrder(long id) {
+        this.orderRepository.deleteById(id);
+    }
+
 }
